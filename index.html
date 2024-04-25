@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Чат-приложение</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .chat-сообщения {
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .chat-ввод {
+      display: flex;
+      align-items: center;
+    }
+
+    #chat-ввод {
+      flex-grow: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #отправить-кнопка {
+      margin-left: 10px;
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-сообщения"></div>
+    <div class="chat-ввод">
+      <input type="text" placeholder="Введите ваше сообщение..." id="chat-ввод">
+      <button id="отправить-кнопка">Отправить</button>
+    </div>
+  </div>
+
+  <script>
+    const chatСообщения = document.querySelector('.chat-сообщения');
+    const chatВвод = document.getElementById('chat-ввод');
+    const отправитьКнопка = document.getElementById('отправить-кнопка');
+
+    chatВвод.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter') {
+        отправитьСообщение();
+      }
+    });
+
+    отправитьКнопка.addEventListener('click', отправитьСообщение);
+
+    function отправитьСообщение() {
+      const сообщение = chatВвод.value.trim();
+      if (сообщение !== '') {
+        const сообщениеЭлемент = document.createElement('div');
+        сообщениеЭлемент.textContent = сообщение;
+        chatСообщения.appendChild(сообщениеЭлемент);
+        chatВвод.value = '';
+        chatСообщения.scrollTop = chatСообщения.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
